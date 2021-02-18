@@ -1,0 +1,24 @@
+syntax = "proto3";
+package compress;
+
+option go_package = ".;compress";
+import "google/protobuf/empty.proto";
+
+
+service Collector {
+    rpc Push (Payload) returns (google.protobuf.Empty);  
+}
+
+message Log {
+    string app_name = 1;
+    string api_name = 2;
+    string correlation_id = 3;
+    int32 return_code = 4;
+    int64 execution_time = 5;
+    int32 template_id = 6;
+    string data = 7;
+}
+
+message Payload {
+    repeated Log logs = 1;
+}
